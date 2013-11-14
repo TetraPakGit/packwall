@@ -1,0 +1,60 @@
+/* Icons
+   Create by using the following markup:
+   <i class="icon [icon-name]"></i> */
+.icon {
+  display: inline-block;
+  background: #0b1a38 url('../img/icon-arrow-up.png') no-repeat center center;
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  vertical-align: bottom;
+}
+
+.icon.arrow-up {
+  background-image: url('../img/icon-arrow-up.png');
+  background-position: center 4px;
+}
+
+.icon.arrow-down {
+  background-image: url('../img/icon-arrow-down.png');
+  background-position: center 6px;
+}
+
+.icon.arrow-right {
+  background-image: url('../img/icon-arrow-right.png');
+  background-position: 6px center;
+}
+
+.icon.arrow-left {
+  background-image: url('../img/icon-arrow-left.png');
+  background-position: 4px center;
+}
+
+.icon.cross {
+  background-image: url('../img/icon-cross.png');
+}
+
+
+/* Standard animations */
+#overlay,
+#overlay-message,
+#product-image,
+#preloader,
+#result .item img,
+#result .extra-info,
+a,
+#filter .items ul ul,
+#filter {
+  -moz-transition-property: all;
+  -moz-transition-duration: 0.15s;
+  -moz-transition-delay: 0;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 0.15s;
+  -webkit-transition-delay: 0;
+  -o-transition-property: all;
+  -o-transition-duration: 0.15s;
+  -o-transition-delay: 0;
+  transition-property: all;
+  transition-duration: 0.15s;
+  transition-delay: 0;
+}

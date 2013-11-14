@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--[if lt IE 8]> <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Packwall</title>
+    <link rel="stylesheet" media="screen, print" type="text/css" href="css/avenir/avenir.css" />
+    <link rel="stylesheet" media="screen, print" type="text/css" href="css/pw-reset.css" />
+    <link rel="stylesheet" media="screen, print" type="text/css" href="css/jquery.checkbox.css" />
+    <link rel="stylesheet" media="screen, print" type="text/css" href="css/jquery.jscrollpane.css" />
+    <link rel="stylesheet" media="screen, print" type="text/css" href="css/pw-reusables.css" />
+    <link rel="stylesheet" media="screen, print" type="text/css" href="css/pw-main.css" />
+
+    <!--[if IE 8]>
+      <link rel="stylesheet" media="screen, print" type="text/css" href="css/pw-ie8.css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.history.js"></script>
+    <script type="text/javascript" src="js/jquery.checkbox.min.js"></script>
+    <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="assets/pw-data.js"></script>
+    <script type="text/javascript" src="js/pw-main.js"></script>
+
+	<script type="text/javascript">
+
+		  // -----------------
+		  // Settings
+		  // -----------------
+
+		  var settings = {};
+		  settings.gridlimit = {};
+		  settings.gridlimit.small = {};
+		  settings.gridlimit.large = {};
+		  settings.imagesuffix = {};
+
+		  // What should the start message display?
+		  // You may use the following HTML-tags:
+		  // <br>, <em> & <strong>
+		  settings.startmessage = 'Get inspired!<br>Browse among <strong>2359</strong> packages<br>from all over the world.';
+
+		  // Where should contact me link on single pages point? Set to false to hide.
+		  settings.contactme = 'http://www.tetrapak.com/contact/pages/default.aspx';
+
+		  //Adobe AIR has issues with History.js, thus we cannot use this in PXPL.
+		  settings.useHistory = true;
+
+		  settings.showfilter = true;                     // Do you want to display the filter? If not, the pagination will be centered.
+		  settings.showshape = true;                     // Set to true to add be able to sort by Shape in the filter.
+		  settings.gridlimit.small.oneline = 11;          // Max number of products to generate the one line grid below 1140px.
+		  settings.gridlimit.small.twoline = 24;          // Max number of products to generate the two line grid below 1140px.
+		  settings.gridlimit.large.oneline = 11;          // Max number of products to generate the one line grid above 1140px.
+		  settings.gridlimit.large.twoline = 32;          // Max number of products to generate the two line grid above 1140px.
+		  settings.imagepath = 'assets/images/';
+		  settings.imagesuffix.singleprod = '_detail.png'; // Image suffix to use when we show single product view.
+		  settings.imagesuffix.oneline = '_large.png';    // Image suffix to use when we show product in one line grid.
+		  settings.imagesuffix.twoline = '_medium.png';   // Image suffix to use when we show product in two line grid.
+		  settings.imagesuffix.threeline = '_small.png';  // Image suffix to use when we show product in three line grid.
+
+	</script>
+
+  </head>
+  <body class="filter-closed">
+    <div id="result">
+      <div id="result-wrap">
+        <div id="single-product" class="hidden">
+          <a href="#" class="close-single">Back to overview</a>
+          <a class="back" href="#">Previous</a>
+          <a class="forward" href="#">Next</a>
+          <div class="product">
+            <div class="product-image-container">
+              <img id="preloader" src="img/loader.gif">
+              <img id="product-image" src="">
+            </div>
+            <div class="information">
+              <h2 class="title"></h2>
+              <p class="packaging"><b>Packaging:</b> <span></span></p>
+              <p class="category"><b>Category:</b> <span></span></p>
+              <p class="brand"><b>Brand:</b> <span></span></p>
+              <p class="country"><b>Country:</b> <span></span></p>
+              <p class="text"></p>
+              <p class="contact"><a href="#">Contact me</a></p>
+              <p class="external"><a href="#">External link</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="resultlist">
+          <div id="result-inner">
+            <div class="page"></div>
+          </div>
+          <p id="pagination-helper"></p>
+          <p id="pagination"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="filter">
+      <h2 id="filter-header"><a href="#"><b>Create your own selection of packages</b> <i class="icon arrow-up"></i></a></h2>
+      <div class="filter-inner">
+        <div id="category" class="col">
+          <div class="collapsed-active-filters">
+            <h3>Category</h3>
+            <div class="current-selection"></div>
+          </div>
+          <h3>Category</h3>
+          <div class="items"></div>
+          <div class="current-selection"></div>
+        </div>
+        <div id="volume" class="col">
+          <div class="collapsed-active-filters">
+            <h3>Volume</h3>
+            <div class="current-selection"></div>
+          </div>
+          <h3>Volume</h3>
+          <div class="items"></div>
+          <div class="current-selection"></div>
+        </div>
+        <div id="type" class="col">
+          <div class="collapsed-active-filters">
+            <h3>Type</h3>
+            <div class="current-selection"></div>
+          </div>
+          <h3>Type</h3>
+          <div class="items"></div>
+          <div class="current-selection"></div>
+        </div>
+        <div id="location" class="col">
+          <div class="collapsed-active-filters">
+            <h3>Location</h3>
+            <div class="current-selection"></div>
+          </div>
+          <h3>Location</h3>
+          <div class="items"></div>
+          <div class="current-selection"></div>
+        </div>
+        <div id="shape" class="col">
+          <div class="collapsed-active-filters">
+            <h3>Shape</h3>
+            <div class="current-selection"></div>
+          </div>
+          <h3>Shape</h3>
+          <div class="items"></div>
+          <div class="current-selection"></div>
+        </div>
+        <p class="filter-footer">
+          <b id="number-of-matches"></b>
+          <a id="reset-filter" href="#">Clear <i class="icon cross"></i></a>
+          <a id="set-filter" href="#">Go <i class="icon arrow-right"></i></a>
+        </p>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="overlay-message"></div>
+
+  </body>
+</html>

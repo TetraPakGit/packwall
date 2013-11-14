@@ -1,0 +1,34 @@
+#filter.has-selection {
+  bottom: 70px !important;
+}
+
+#filter.has-selection.open {
+  bottom: 0 !important;
+}
+
+
+#overlay,
+#overlay-message {
+  display: none;
+}
+
+#overlay.visible,
+#overlay-message.visible {
+  z-index: 100;
+  display: block;
+}
+
+#overlay.visible {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+}
+
+
+#resultlist.hidden,
+#single-product.hidden {
+  display: none;
+}
+
+
+#preloader {
+  display: none !important;
+}

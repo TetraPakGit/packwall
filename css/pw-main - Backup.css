@@ -1,0 +1,832 @@
+/* SETTINGS --------------- */
+
+/* Filter menu height */
+#filter.open { height: 360px; } /* Complete height of filter. Original: 360px. */
+.filter-inner { height: 320px; } /* Complete height minus 40px (height of filter-header). Original: 320px. */
+#filter .col .items { height: 175px; } /* Height of wrapper that controls scrolling in list. .filter-inner minus 145. Original: 175px. */
+
+/* Minimum height of result view. To prevent the pagination from jumping. */
+#resultlist, #single-product { min-height: 515px; }
+#result { margin-top: -257px !important; } /* Minus half of #resultlist to center vertically in all browsers */
+
+/* GENERAL --------------- */
+html {
+  height: 100%;
+}
+
+body {
+  color: #fff;
+  font-family: 'Avenir LT W02 55 Roman', Arial, sans-serif;
+  overflow-x: hidden;
+  font-size: 13px;
+  line-height:16px;
+  min-height: 100%;
+  background: rgb(52,132,199);
+  background: -moz-linear-gradient(top,  rgba(52,132,199,1) 0%, rgba(52,132,199,1) 66%, rgba(121,177,227,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,132,199,1)), color-stop(66%,rgba(52,132,199,1)), color-stop(100%,rgba(121,177,227,1)));
+  background: -webkit-linear-gradient(top,  rgba(52,132,199,1) 0%,rgba(52,132,199,1) 66%,rgba(121,177,227,1) 100%);
+  background: -o-linear-gradient(top,  rgba(52,132,199,1) 0%,rgba(52,132,199,1) 66%,rgba(121,177,227,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(52,132,199,1) 0%,rgba(52,132,199,1) 66%,rgba(121,177,227,1) 100%);
+  background: linear-gradient(top,  rgba(52,132,199,1) 0%,rgba(52,132,199,1) 66%,rgba(121,177,227,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3484c7', endColorstr='#79b1e3',GradientType=0 );
+}
+
+
+/* FILTER --------------- */
+#filter {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  left: 3%;
+  right: 3%;
+  overflow: hidden;
+}
+
+#filter.has-selection {
+  min-height: 120px;
+}
+
+#filter .col .collapsed-active-filters {
+  height: 70px;
+}
+
+#filter.open .collapsed-active-filters {
+  display: none;
+}
+
+#filter .col .collapsed-active-filters .current-selection {
+  margin-top: 5px;
+}
+
+.filter-inner {
+  display: block;
+  position: relative;
+  font-size: 0; /* To let us use inline-block without spaces */
+}
+
+#filter .filter-inner,
+#filter #filter-header a {
+  background: #142f65;
+  background: rgba(20, 47, 101, 0.9);
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#filter #filter-header {
+  text-align: center;
+  height: 40px;
+  overflow: hidden;
+}
+
+#filter #filter-header a {
+  display: inline-block;
+  padding: 13px 10px;
+  color: #e6e6e6;
+  text-decoration: none;
+  min-width: 360px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 16px;
+  min-height: 40px;
+}
+
+#filter #filter-header a:focus,
+#filter #filter-header a:hover {
+  color: #ABC4D7;
+}
+
+#filter #filter-header a b {
+  font-weight: inherit;
+}
+
+#filter .col {
+  font-size: 13px;
+  width: 22%;
+  display: inline-block;
+  margin: 20px 1.5% 0 1.5%;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+#filter .col h3 {
+  font-family: 'Avenir LT W02 85 Heavy', Arial, sans-serif;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #71809b;
+}
+
+#filter .col .items {
+  overflow: auto;
+}
+
+#filter .col .current-selection {
+  margin-top: 18px;
+  line-height: 1.3em;
+  height: 1.3em;
+}
+
+#filter .items .main-cat {
+  padding: 10px 35px 10px 25px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-bottom: 1px;
+}
+
+#filter .items .main-cat.partial > .jquery-checkbox img {
+  background-position: -16px 0;
+}
+
+#filter .items .main-cat.partial > .jquery-checkbox-checked img {
+  background-position: 0 -16px;
+}
+
+#filter .items li {
+  position: relative;
+}
+
+#filter .items .jquery-checkbox,
+#filter .items input[type="checkbox"] {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+#filter .items .main > li > ul > li {
+  padding: 5px 35px 5px 25px;
+}
+
+#filter .items .main > li > ul {
+  height: 0;
+  overflow: hidden;
+}
+
+#filter .items .main > .sub-open > ul {
+  height: auto;
+}
+
+#filter .subtoggle {
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  background: transparent url('../img/icon-arrow-right.png') no-repeat 10px center;
+  padding-left: 25px;
+  margin-left: -25px;
+}
+
+#filter .sub-open .subtoggle {
+  background-image: url('../img/icon-arrow-down.png');
+}
+
+#filter .filter-footer {
+  position: absolute;
+  bottom: 0;
+  left: 1.5%;
+  right: 1.5%;
+  font-size: 14px;
+  font-family: 'Avenir LT W02 85 Heavy', Arial, sans-serif;
+  border-top: 1px solid #465d89;
+  padding: 10px 0;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+#filter .filter-footer #number-of-matches,
+#filter .filter-footer a {
+  display: inline-block;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  line-height: 16px;
+}
+
+#filter .filter-footer #number-of-matches {
+  float: left;
+  min-width: 125px;
+  text-align: left;
+}
+
+#filter .filter-footer a {
+  padding-left: 11px;
+  padding-right: 11px;
+  background: #0a162c;
+  color: #fff;
+  border-radius: 3px;
+  min-width: 80px;
+  text-decoration: none;
+}
+
+#filter .filter-footer a:hover,
+#filter .filter-footer a:focus {
+  background: #0F2148;
+}
+
+#filter .filter-footer a.inactive {
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  background: #0a162c;
+  cursor: default;
+}
+
+#filter .filter-footer .icon {
+  background-color: #040912;
+  float: right;
+}
+
+#filter .items,
+#filter .jspContainer {
+  outline: 0 !important;
+}
+
+#filter .jspTrack {
+  background: #72809b;
+}
+
+#filter .jspVerticalBar {
+  width: 5px;
+}
+
+#filter .jspHorizontalBar {
+  height: 5px;
+}
+
+#filter .jspVerticalBar .jspDrag {
+  background: rgb(5,21,46);
+  background: -moz-linear-gradient(left,  rgba(5,21,46,1) 0%, rgba(25,38,62,1) 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(5,21,46,1)), color-stop(100%,rgba(25,38,62,1)));
+  background: -webkit-linear-gradient(left,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  background: -o-linear-gradient(left,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  background: -ms-linear-gradient(left,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  background: linear-gradient(to right,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05152e', endColorstr='#19263e',GradientType=1 );
+}
+
+#filter .jspHorizontalBar .jspDrag {
+  background: rgb(5,21,46);
+  background: -moz-linear-gradient(top,  rgba(5,21,46,1) 0%, rgba(25,38,62,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(5,21,46,1)), color-stop(100%,rgba(25,38,62,1)));
+  background: -webkit-linear-gradient(top,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  background: -o-linear-gradient(top,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  background: linear-gradient(to bottom,  rgba(5,21,46,1) 0%,rgba(25,38,62,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05152e', endColorstr='#19263e',GradientType=0 );
+}
+
+#filter .jspHorizontalBar {
+  background: transparent;
+}
+
+/* If we want shape filter wo be visible, add .with-shape to body */
+#filter #shape {
+  display: none;
+}
+
+body.with-shape #filter #shape {
+  display: inline-block;
+}
+
+body.with-shape #filter .col {
+  width: 17%;
+}
+
+
+
+/* RESULT GRID --------------- */
+#result {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+
+#resultlist {
+  margin: 0 auto;
+  position: relative;
+}
+
+#result .item {
+  float: left;
+  text-align: center;
+  margin: 10px 0;
+  position: relative;
+  display: block;
+}
+
+#result-inner > .item {
+  display: none;
+}
+
+#result .item a {
+  text-decoration: none;
+}
+
+#result .item img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+body.filter-closed #result .page:hover img {
+  opacity: 0.5 !important;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+body.filter-closed #result .item img:hover, .oldie body.filter-closed #result .page:hover img.active  {
+  opacity: 1 !important;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+#result .extra-info {
+  display: block;
+  width: 0;
+  padding: 0;
+  left: 65%;
+  z-index: 10;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  overflow: hidden;
+  top: 50%;
+  position: absolute;
+  min-width: 200px;
+  background: #142f65;
+  background: rgba(20, 47, 101, 0.9);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 4px 0px #ffffff;
+  box-shadow: 0px 0px 4px 0px #ffffff;
+  -moz-transition-property: opacity, left, right;
+  -moz-transition-duration: 0.10s;
+  -moz-transition-delay: 0;
+  -webkit-transition-property: opacity, left, right;
+  -webkit-transition-duration: 0.10s;
+  -webkit-transition-delay: 0;
+  -o-transition-property: opacity, left, right;
+  -o-transition-duration: 0.10s;
+  -o-transition-delay: 0;
+  transition-property: opacity, left, right;
+  transition-duration: 0.10s;
+  transition-delay: 0;
+}
+
+#result .extra-info.height-calculated {
+  height: 0;
+}
+
+#result .extra-info h3 {
+  font-family: "Avenir LT W02 85 Heavy", Arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#result .extra-info p {
+  line-height: 1.3em;
+}
+
+#result .item a,
+#result .item {
+  cursor: default !important;
+}
+
+body.filter-closed #result .item a,
+body.filter-closed #result .item {
+  cursor: pointer !important;
+}
+
+#result .item a {
+  display: block;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+body.filter-closed #result .item a:hover {
+  z-index: 11;
+}
+
+body.filter-closed #result .item a:hover + .extra-info, .oldie body.filter-closed #result .extra-info:hover  {
+  height: auto;
+  width: auto;
+  padding: 12px 16px;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  left: 75%;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+  z-index: 30;
+}
+
+.extra-info {
+  pointer-events: none;
+}
+
+#result-wrap {
+  margin: 0 auto;
+  position: relative;
+}
+
+#result.large #result-wrap {
+  max-width: 1170px;
+}
+
+#result.large.threeline .item {
+  width: 8.33%;
+}
+
+#result.large.twoline .item {
+  width: 12.5%;
+}
+
+#result.large.oneline .item {
+  width: 25%;
+}
+
+#result.small #result-wrap {
+  max-width: 940px;
+}
+
+#result.small.threeline .item {
+  width: 11.11%;
+}
+
+#result.small.twoline .item {
+  width: 16.66%;
+}
+
+#result.small.oneline .item {
+  width: 33.33%;
+}
+
+/* Clearing proper rows */
+#result.small.twoline .item:nth-child(7),
+#result.small.threeline .item:nth-child(9n+10),
+#result.large.twoline .item:nth-child(9),
+#result.large.threeline .item:nth-child(12n+13) {
+  clear: left;
+}
+
+/* Placing popup box to the right instead of the left depending on grid */
+#result .item.left .extra-info {
+  left: auto !important;
+  right: 65% !important;
+}
+
+#result .item.left:hover .extra-info {
+  right: 75% !important;
+}
+
+
+/* PAGINATION --------------- */
+#pagination-helper,
+#pagination {
+  margin: 0 3%;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#pagination-helper {
+  text-align: left;
+  right: auto;
+  left: 0;
+  line-height: 30px;
+  text-transform: uppercase;
+  min-width: 190px;
+}
+
+body.no-filter #pagination {
+  text-align: center;
+  left: 0;
+}
+
+body.no-filter #pagination-helper,
+body.no-filter #filter {
+  display: none;
+}
+
+#pagination span,
+#pagination span.filler,
+#pagination a {
+  display: inline-block;
+  text-align: center;
+  height: 28px;
+  width: 28px;
+  line-height: 28px;
+  background: #407bb6;
+  border: 1px solid #407bb6;
+  border-radius: 100px;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 2px;
+}
+
+#pagination a:hover,
+#pagination a:focus {
+  background-color: #2A527A;
+  border-color: #2A527A;
+}
+
+#pagination span:first-child,
+#pagination a:first-child {
+  margin-left: 0;
+}
+
+#pagination span {
+  border-color: #193d77;
+  color: #193d77;
+  background: transparent;
+}
+
+#pagination .prev,
+#pagination .next {
+  background: #193d77 url('../img/arrow-prev.png') 9px center no-repeat;
+  border-color: #193d77;
+  text-indent: -99999em;
+}
+
+#pagination .next {
+  background-image: url('../img/arrow-next.png');
+  background-position: 11px center;
+}
+
+#pagination .prev:hover,
+#pagination .next:hover,
+#pagination .prev:focus,
+#pagination .next:focus {
+  background-color: #0A1A36;
+  border-color: #0A1A36;
+}
+
+#pagination span.prev,
+#pagination span.next {
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  border-color: #193d77 !important;
+  background-color: #193d77 !important;
+}
+
+
+/* SINGLE PRODUCTS --------------- */
+#single-product {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+#single-product #preloader {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -24px;
+  margin-top: -24px;
+}
+
+#single-product a.close-single {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 10px 10px 40px;
+  background: #2967a5 url('../img/icon-back.png') 10px center no-repeat;
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  z-index: 30;
+}
+
+#single-product a.close-single:hover {
+  background-color: #225890;
+}
+
+#single-product .inner {
+  clear: right;
+}
+
+#single-product .back,
+#single-product .forward {
+  display: block;
+  text-align: center;
+  background: #113670 url('../img/arrow-prev-large.png') 16px center no-repeat;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  text-indent: -9999em;
+  border-radius: 100px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -23px;
+  z-index: 30;
+}
+
+#single-product .forward {
+  background-image: url('../img/arrow-next-large.png');
+  background-position: 18px center;
+  left: auto;
+  right: 0;
+}
+
+#single-product .back:focus,
+#single-product .forward:focus,
+#single-product .back:hover,
+#single-product .forward:hover {
+  background-color: #0A1A36;
+}
+
+#single-product .product {
+  text-align: center;
+  font-size: 0;
+  position: relative;
+  height: 435px;
+}
+
+#single-product .product-image-container {
+  width: 312px;
+  height: 435px;
+  position: relative;
+}
+
+#single-product .product-image-container #product-image {
+  position: absolute;
+  bottom: 0;
+}
+
+#single-product .information, #single-product #product-image, .product-image-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#single-product .information {
+  max-width: 370px;
+  width: 62%;
+  margin: 0 1%;
+  padding: 2%;
+  -webkit-box-shadow: 0px 0px 4px 0px #ffffff;
+  box-shadow: 0px 0px 4px 0px #ffffff;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: -moz-linear-gradient(-45deg,  rgba(0,0,0,0.11) 0%, rgba(0,0,0,0) 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(0,0,0,0.11)), color-stop(100%,rgba(0,0,0,0)));
+  background: -webkit-linear-gradient(-45deg,  rgba(0,0,0,0.11) 0%,rgba(0,0,0,0) 100%);
+  background: -o-linear-gradient(-45deg,  rgba(0,0,0,0.11) 0%,rgba(0,0,0,0) 100%);
+  background: -ms-linear-gradient(-45deg,  rgba(0,0,0,0.11) 0%,rgba(0,0,0,0) 100%);
+  background: linear-gradient(-45deg,  rgba(0,0,0,0.11) 0%,rgba(0,0,0,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c000000', endColorstr='#00000000',GradientType=1 );
+}
+
+#single-product h2 {
+  font-family: 'Avenir LT W02 85 Heavy', sans-serif;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+#single-product p {
+  line-height: 1.3em;
+  font-size: 13px;
+}
+
+#single-product b {
+  font-weight: normal;
+  font-family: 'Avenir LT W02 85 Heavy', sans-serif;
+}
+
+#single-product .text,
+#single-product .contact,
+#single-product .external {
+  margin-top: 15px;
+}
+
+#single-product .contact + .external {
+  margin-top: 0;
+}
+
+#single-product .contact,
+#single-product .external {
+  display: none;
+}
+
+#single-product .contact a,
+#single-product .external a {
+  background: transparent url('../img/icon-arrow-right.png') left 3px no-repeat;
+  padding-left: 10px;
+  display: inline-block;
+  font-family: 'Avenir LT W02 85 Heavy', sans-serif;
+  color: #fff;
+  text-decoration: none;
+}
+
+#resultlist,
+#single-product {
+  -moz-transition-property: all;
+  -moz-transition-duration: 0.4s;
+  -moz-transition-delay: 0;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 0.4s;
+  -webkit-transition-delay: 0;
+  -o-transition-property: all;
+  -o-transition-duration: 0.4s;
+  -o-transition-delay: 0;
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-delay: 0;
+}
+
+#resultlist.hidden,
+#single-product.hidden {
+  z-index: -10;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+#resultlist.hidden {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9998157121216442, M12=-0.01919744239968967, M21=0.01919744239968967, M22=0.9998157121216442,SizingMethod='auto expand');
+}
+
+#single-product.hidden {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9998766324816606, M12=-0.015707317311820675, M21=0.015707317311820675, M22=0.9998766324816606,SizingMethod='auto expand');
+}
+
+
+/* OVERLAY (WELCOME MESSAGE) --------------- */
+#overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+}
+
+#overlay-message {
+  font-family: 'Avenir LT W02 35 Light', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  padding: 30px;
+  background: rgb(20, 47, 101);
+  background: rgba(20, 47, 101, 0.8);
+  width: 500px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 4px 0px #ffffff;
+  box-shadow: 0px 0px 4px 0px #ffffff;
+  position: absolute;
+  left: 50%;
+  margin-left: -280px;
+  top: 50%;
+  margin-top: -65px;
+  line-height: 1.3em;
+  cursor: pointer;
+}
+
+#overlay,
+#overlay-message {
+  z-index: -10;
+  opacity: 0;
+}
+
+#overlay.visible,
+#overlay-message.visible {
+  z-index: 100;
+}
+
+#overlay.visible {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+}
+
+#overlay-message.visible {
+  opacity: 1;
+}
+
+#overlay-message strong,
+#overlay-message b {
+  font-family: 'Avenir LT W02 85 Heavy', sans-serif;
+  font-weight: normal;
+}
+
+#overlay-message em,
+#overlay-message i {
+  font-family: 'AvenirLTW02-35LightObli', sans-serif;
+}
